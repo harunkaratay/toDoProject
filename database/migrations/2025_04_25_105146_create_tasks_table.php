@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->string('title')->nullable();
             $table->string('content');
