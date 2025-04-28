@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->string('title')->nullable();
             $table->string('content');
-            $table->tinyInteger('status')->default(0)->comment('0 - yapılmadı, 1 - yapılıyor, 2 - ertelendi, 3 - iptal oldu');
+            $table->tinyInteger('status')->default(0)->comment('0 - yapıldı, 1 - yapılıyor, 2 - ertelendi, 3 - iptal oldu, 4 - yapılmadı');
             $table->dateTime('deadline')->nullable();
             $table->softdeletes();
             $table->timestamps();
