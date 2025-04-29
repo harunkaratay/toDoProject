@@ -15,17 +15,20 @@ class TaskController extends Controller
         //dump and die
         //dd($req->all());
 
-        // validayson doğrulama
+        // Validation doğrulama
+       $req->validate([
+           'title' => 'required|max:12|min:3',
+       ]);
 
-        $task = new Task();
-        $task ->category_id = 1;
-        $task->title = $req->title;
-        $task->content = $req->content;
-        $task->status = $req->status;
-        $task->deadline = $req->deadline;
-        $task->save();
+       $task = new Task();
+       $task->category_id=1;
+       $task->title = $req->input('title');
+       $task->content = $req->input('content');
+       $task->status = $req->input('status');
+       $task->deadline = $req->input('deadline');
+       $task->save();
 
-        return 'success';
+       return'başarılı';
+
     }
 }
-
