@@ -20,7 +20,7 @@
         <div class="card-body">
             <div class="card">
                 <h5 class="card-header">Kategori Listesi</h5>
-                @if($categories->first()!=0)
+                @if($categories->first())
                 <p class="ms-5">Kategori listesi aşağıdaki tabloda bulunmaktadır</p>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
@@ -47,9 +47,9 @@
                                 </td>
                                 <td>{{$c->created_at}}</td>
                                 <td>
-                                <button class="btn btn-sm btn-info">
+                                <a href="{{route('panel.categoryUpdatePage', $c->id)}}" class="btn btn-sm btn-info">
                                     Güncelle
-                                </button>
+                                </a>
                                 <button class="btn btn-sm btn-danger">
                                     Sil
                                 </button>

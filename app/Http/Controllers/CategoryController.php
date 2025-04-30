@@ -27,4 +27,10 @@ class CategoryController extends Controller
         return redirect()->route('panel.categoryIndex')->with(['success'=>'Kategori başarıyla oluşturuldu.✅']);
     }
 
+    public function updatePage($id){
+        //$category = Category::where('id',$id)->first();
+        $category = Category::find($id);
+        return view('panel.categories.update', compact('category'));
+    }
+
 }
