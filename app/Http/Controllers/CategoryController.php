@@ -32,5 +32,26 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('panel.categories.update', compact('category'));
     }
+    public function updateCategory(request $request){
+
+        $request->validate([
+            //'form_name'=>'kurallar'|'kurallar'
+            'category_status'=>'min:0|max:1|required',
+            'category_name'=>'min:3|max:25|required',
+        ]);
+
+        $category=Category::find($request->category_id);
+        if($category!=null){
+
+            $category->name= $request->category_name;
+            $category->is_active= $request->category_status;
+            $category->save();
+            return redirect()->route('panel.categoryIndex')->with(['success'=>'Kategori başarıyla güncellendi.✅']);
+
+        }
+        else{
+            return redirect()->route('panel.categoryIndex')->with(['errors'=>'Tamam, en büyük hacker sensin']);
+        }
+    }
 
 }

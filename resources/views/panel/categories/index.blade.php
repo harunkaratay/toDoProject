@@ -13,6 +13,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+                @if(session('errors'))
+                    <div class="alert alert-denger alert-dismissible fade show" role="alert">
+                        {{session('errors')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
             <h3>Kategoriler</h3>
             <a href="{{route('panel.categoryCreatePage')}}" class="btn btn-m btn-success"> Yeni Kategori Oluştur</a>
         </div>

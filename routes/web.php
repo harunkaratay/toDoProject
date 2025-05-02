@@ -26,4 +26,5 @@ Route::get('/panel/categories/index', [CategoryController::class,'index'])->name
 Route::get('/panel/categories/create', [CategoryController::class,'createPage'])->name('panel.categoryCreatePage');
 Route::post('/panel/categories/addCategory', [CategoryController::class,'addCategory'])->name('panel.addCategory');
 Route::get('/panel/categories/update/{id}' , [CategoryController::class, 'updatePage'])->name('panel.categoryUpdatePage');
+Route::post('/panel/categories/updatePost' , [CategoryController::class, 'updateCategory'])->name('panel.updateCategory');
 //kategori routes end
