@@ -10,4 +10,12 @@ class Category extends Model
 {
     use HasFactory, softDeletes;
     protected $table = 'categories';
+
+    public function getTask(){
+        return $this->hasMany(Task::class, 'category_id','id');
+    }
+
+    public function getUser(){
+        return $this->belongsTo(User::class, 'category_id','id');
+    }
 }

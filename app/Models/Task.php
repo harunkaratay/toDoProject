@@ -9,4 +9,8 @@ class Task extends Model
 {
     use HasFactory;
     protected $table = 'tasks';
+
+    public function getCategory(){
+        return $this->belongsTo(Category::class, 'category_id','id');
+    }
 }

@@ -2,33 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function createPage(){
-        return view('panel.tasks.create');
+    public function index(){
+        $tasks = Auth::user()->getTasks();
+        $tasks = Task::all(); // veya Task::where('user_id', auth()->id())->get();
+        return view('panel.tasks.index', compact('tasks'));
     }
 
-    public function addTask(Request $req){
+    public function createPage(){
+        $categories = Category::where('user_id', Auth::user()->id)->get();
+        return view('panel.tasks.create', compact('categories'));
+    }
+
+    public function addTask(Request $request){
         //dump and die
         //dd($req->all());
 
         // Validation doğrulama
-       $req->validate([
+       $request->validate([
            'title' => 'required|max:12|min:3',
        ]);
 
        $task = new Task();
-       $task->category_id=1;
-       $task->title = $req->input('title');
-       $task->content = $req->input('content');
-       $task->status = $req->input('status');
-       $task->deadline = $req->input('deadline');
+       $task->category_id = $request->input('category');
+       $task->title = $request->input('title');
+       $task->content = $request->input('content');
+       $task->status = $request->input('status');
+       $task->deadline = $request->input('deadline');
        $task->save();
 
-       return'başarılı';
-
+       return redirect()->route('panel.Index')->with(['success', 'Görev başarıyla eklendi.']);
     }
+
 }

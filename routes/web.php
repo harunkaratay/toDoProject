@@ -16,8 +16,9 @@ Route::get('/testTamplate', function () {
 
 
 // tasks routes start
-Route::get('/panel/tasks/create', [TaskController::class,'createPage'])->name('panel.CreateTasksPage');
-Route::post('/panel/tasks/add', [TaskController::class,'addTask'])->name('panel.AddTask');
+Route::get('/panel/tasks/index', [TaskController::class,'index'])->name('panel.Index');
+Route::get('/panel/tasks/create', [TaskController::class,'createPage'])->name('panel.createTasksPage');
+Route::post('/panel/tasks/add', [TaskController::class,'addTask'])->name('panel.addTask');
 // tasks routes end
 
 

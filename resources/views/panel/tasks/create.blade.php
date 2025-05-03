@@ -1,10 +1,6 @@
 @extends('panel.layout.app')
 
-
-
 @section('content')
-
-
     <div class="card p-4">
         <div class="card-header">
             <h2>Görev Oluştur</h2>
@@ -19,6 +15,14 @@
 
                         <label for="defaultFormControlInput" class="form-label">İçerik</label>
                         <input type="text" class="form-control" name="content">
+
+                        <label for="defaultFormControlInput" class="form-label">Kategori</label>
+                        <select name="category" class="form-control">
+                            <option selected value="" disabled >Lütfen Seçim Yapınız</option>
+                            @foreach($categories as $c)
+                                <option value="{{$c->id}}">{{$c->name}}</option>
+                            @endforeach
+                        </select>
 
                         <label for="defaultFormControlInput" class="form-label">Durum</label>
                         <select name="status" class="form-control">
@@ -40,6 +44,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection
