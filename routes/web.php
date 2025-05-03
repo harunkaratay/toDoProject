@@ -27,4 +27,15 @@ Route::get('/panel/categories/create', [CategoryController::class,'createPage'])
 Route::post('/panel/categories/addCategory', [CategoryController::class,'addCategory'])->name('panel.addCategory');
 Route::get('/panel/categories/update/{id}' , [CategoryController::class, 'updatePage'])->name('panel.categoryUpdatePage');
 Route::post('/panel/categories/updatePost' , [CategoryController::class, 'updateCategory'])->name('panel.updateCategory');
+Route::get('/panel/categories/deleteCategory/{id}' , [CategoryController::class, 'deleteCategory'])->name('panel.deleteCategory');
 //kategori routes end
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

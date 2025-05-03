@@ -51,14 +51,10 @@
                                         Pasif
                                     @endif
                                 </td>
-                                <td>{{$c->created_at}}</td>
+                                <td>{{$c->created_at->diffForHumans()}}</td>
                                 <td>
-                                <a href="{{route('panel.categoryUpdatePage', $c->id)}}" class="btn btn-sm btn-info">
-                                    Güncelle
-                                </a>
-                                <button class="btn btn-sm btn-danger">
-                                    Sil
-                                </button>
+                                <a href="{{route('panel.categoryUpdatePage', $c->id)}}" class="btn btn-sm btn-info">Güncelle</a>
+                                <a href="{{route('panel.deleteCategory', $c->id)}}" class="btn btn-sm btn-danger">Sil</a>
                                 </tr>
                         @endforeach
                         </tbody>

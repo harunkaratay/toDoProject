@@ -13,18 +13,14 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->boolean('is_active')->default(1) ->comment('0 - inaktif, 1 - aktif');
             $table->softDeletes();
             $table->timestamps();
-        });
-    }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('categories');
+            $table->foreign('user_id')->references('id')->on('users');
+
+        });
     }
 };

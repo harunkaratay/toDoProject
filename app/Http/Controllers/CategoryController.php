@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
     public function index(){
 
-        $categories = Category::get();
+        $categories = Category::where('user_id', Auth::id())->get();
         return view('panel.categories.index', compact('categories'));
     }
 
@@ -22,8 +23,15 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name= $request->category_name;
-        $category->save();
 
+        if($request->category_status=='Aktif'){
+            $category->is_active = 1;
+        }else{
+            $category->is_active=0;
+        }
+
+        $category->user_id = Auth::id();
+        $category->save();
         return redirect()->route('panel.categoryIndex')->with(['success'=>'Kategori başarıyla oluşturuldu.✅']);
     }
 
@@ -32,6 +40,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('panel.categories.update', compact('category'));
     }
+
     public function updateCategory(request $request){
 
         $request->validate([
@@ -52,6 +61,17 @@ class CategoryController extends Controller
         else{
             return redirect()->route('panel.categoryIndex')->with(['errors'=>'Tamam, en büyük hacker sensin']);
         }
+    }
+
+    public function deleteCategory($id){
+        $category= Category::find($id);
+        if($category!=null){
+            $category->delete();
+            return redirect()->route('panel.categoryIndex')->with(['success'=>'Kategori başarıyla silindi.✅']);
+        }else{
+            return redirect()->route('panel.categoryIndex')->with(['erors'=>'Bir hata oluştu! Kategeri silinemedi.']);
+        }
+
     }
 
 }
